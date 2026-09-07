@@ -153,6 +153,14 @@ ol.steps small{display:block;color:var(--sub);font-size:13px}
 .guide .more{font-size:14px;margin:10px 0 0}
 .cta-inline .cta{display:block}
 form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+#form{background:linear-gradient(180deg,var(--soft) 0%,#fff 100%);border:1px solid var(--line);border-radius:16px;padding:26px 16px 22px;margin:10px 0 0}
+#form h2{border:0;padding:0;text-align:center;font-size:22px;line-height:1.4;margin:0 0 10px}
+#form>p{text-align:center;color:var(--sub);margin:0 0 16px;font-size:15px}
+.fs{background:var(--soft);border-radius:12px;padding:12px 14px 14px;margin:0 0 12px}
+.fs-h{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin:0 0 2px}
+.fs-h i{flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-style:normal;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.fs label{margin:10px 0 4px}
+.fs input[type=text],.fs input[type=tel],.fs input[type=email],.fs select,.fs textarea{background:#fff}
 label{display:block;font-weight:700;margin:12px 0 4px}
 label span{font-weight:400;color:var(--sub);font-size:12px;margin-left:6px}
 input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;padding:12px;border:1px solid #cbd2d9;border-radius:8px;font-size:16px;background:#fff}
@@ -406,18 +414,24 @@ figure.ph figcaption{font-size:13px;color:var(--sub);padding:8px 12px;background
 <input type="hidden" name="gclid" value="">
 <input type="hidden" name="consent_at" value="">
 <div class="hp"><label>会社名<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+<div class="fs"><div class="fs-h"><i>1</i>解体する家のこと</div>
 <label>解体する家の都道府県 <span>必須</span></label><select name="pref" required><option value="">選んでください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select><label>市区町村 <span>必須</span></label><input type="text" name="city" required placeholder="例：長岡市" autocomplete="address-level2"><input type="hidden" name="place" value="">
+</div>
+<div class="fs"><div class="fs-h"><i>2</i>ご連絡先</div>
 <label>お名前 <span>必須</span></label>
 <input type="text" name="name" required autocomplete="name">
 <label>電話番号 <span>必須・折り返しのご連絡に使います</span></label>
 <input type="tel" name="tel" required autocomplete="tel" inputmode="tel">
 <label>メールアドレス <span>必須・受付の控えをお送りします</span></label>
 <input type="email" name="email" required autocomplete="email">
-<label>建物の構造 <span>任意</span></label><select name="structure"><option value="">選んでください</option><option>木造</option><option>鉄骨造</option><option>鉄筋コンクリート造</option><option>分からない</option></select><label>延べ床面積の目安 <span>任意</span></label><select name="size"><option value="">選んでください</option><option>20坪未満</option><option>20〜30坪</option><option>30〜40坪</option><option>40坪以上</option><option>分からない</option></select><label>家財（残置物） <span>任意</span></label><select name="leftovers"><option value="">選んでください</option><option>残っている</option><option>ほぼ片付いている</option><option>ない</option></select><label>解体後の予定 <span>任意</span></label><select name="purpose"><option value="">選んでください</option><option>土地を売る</option><option>建て替える</option><option>更地のまま持つ</option><option>解体するか迷っている</option></select><label>希望の時期 <span>任意</span></label><select name="timing"><option value="">選んでください</option><option>3か月以内</option><option>半年以内</option><option>1年以内</option><option>未定</option></select>
+</div>
+<div class="fs"><div class="fs-h"><i>3</i>家のこと（任意・分かる範囲で）</div><label>建物の構造 <span>任意</span></label><select name="structure"><option value="">選んでください</option><option>木造</option><option>鉄骨造</option><option>鉄筋コンクリート造</option><option>分からない</option></select><label>延べ床面積の目安 <span>任意</span></label><select name="size"><option value="">選んでください</option><option>20坪未満</option><option>20〜30坪</option><option>30〜40坪</option><option>40坪以上</option><option>分からない</option></select><label>家財（残置物） <span>任意</span></label><select name="leftovers"><option value="">選んでください</option><option>残っている</option><option>ほぼ片付いている</option><option>ない</option></select><label>解体後の予定 <span>任意</span></label><select name="purpose"><option value="">選んでください</option><option>土地を売る</option><option>建て替える</option><option>更地のまま持つ</option><option>解体するか迷っている</option></select><label>希望の時期 <span>任意</span></label><select name="timing"><option value="">選んでください</option><option>3か月以内</option><option>半年以内</option><option>1年以内</option><option>未定</option></select></div>
+<div class="fs"><div class="fs-h"><i>4</i>ご希望（任意）</div>
 <label>ご希望の連絡方法と時間帯 <span>任意</span></label>
 <select name="contact_pref"><option value="">選んでください</option><option>電話（平日の日中）</option><option>電話（平日の夕方以降）</option><option>電話（土日）</option><option>メールを希望</option></select>
 <label>ご相談内容 <span>任意</span></label>
 <textarea name="detail" placeholder="例：親の家が空き家です。木造の平屋で家財はそのまま。解体費用と、補助金が使えるか知りたい。"></textarea>
+</div>
 <div class="consent"><input type="checkbox" id="consent" name="consent" value="yes" required><label for="consent" style="margin:0;font-weight:400"><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意し、入力内容を解体する家のある地域で対応できる登録業者（3社以内）へお見積りとご連絡のために提供することに同意します</label></div>
 <button type="submit" id="submit">無料で解体の見積を手配する</button>
 <p class="note" style="text-align:center;margin:10px 0 0">入力は1分。しつこい営業はしません。</p>
