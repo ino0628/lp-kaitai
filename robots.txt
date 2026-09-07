@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /thanks.html
+Disallow: /b.html
+
+Sitemap: https://kaitai.kurashi-annai.com/sitemap.xml
