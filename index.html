@@ -259,9 +259,21 @@ figure.ph figcaption{font-size:13px;color:var(--sub);padding:8px 12px;background
 .fvf-btn{width:100%;display:block;margin:12px 0 0;font-size:17px;padding:15px 16px;border:0;cursor:pointer}
 .fvf-note{margin:8px 0 0;text-align:center}
 @media (min-width:800px){.v .hero.has-fvf{grid-template-columns:1fr 1fr}.v .hero-text>.note:last-child{margin-bottom:0}}
-/* 関係図 */
-figure.rel{margin:14px 0 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
-figure.rel svg{display:block;width:100%;height:auto}
+/* 関係図（HTML）: スマホは縦に積む・PC は横3列 */
+.rel{margin:14px 0 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 14px;display:grid;gap:10px;justify-items:center;text-align:center}
+.rel-you{background:var(--accent);color:#fff;font-weight:800;font-size:17px;border-radius:12px;padding:14px 26px;min-width:8em}
+.rel-office{border:2px solid var(--accent);border-radius:12px;padding:12px 14px;background:#fff;display:grid;gap:4px;max-width:22em}
+.rel-office b{font-size:15px;line-height:1.4}
+.rel-office span{font-size:12px;color:var(--sub);line-height:1.5}
+.rel-vendors{display:grid;gap:8px;width:100%;max-width:22em}
+.rel-vendors span{display:block;border:1px solid #cbd2d9;border-radius:8px;padding:9px 12px;font-size:14px;background:#fff}
+.rel-arr{display:grid;gap:2px;font-size:12px;line-height:1.4;color:var(--sub)}
+.rel-arr .fwd{color:var(--ink);font-weight:700}
+.rel-arr i{font-style:normal;font-weight:800;font-size:18px;color:var(--accent);margin-right:4px;vertical-align:-1px}
+.rel-arr .back i{color:#8a94a0}
+.rel-arr .h{display:none}
+.rel-foot{margin:6px 0 0;font-size:13px;font-weight:700;color:var(--ink)}
+@media (min-width:720px){.rel{grid-template-columns:auto auto auto auto auto;justify-content:space-between;align-items:center;gap:8px;padding:22px 18px 16px}.rel-arr .h{display:inline}.rel-arr .v{display:none}.rel-arr{padding:0 2px;white-space:nowrap}.rel-office{max-width:15em}.rel-vendors{max-width:11em;gap:10px}.rel-foot{grid-column:1 / -1;margin-top:12px}}
 /* 補助金の帯 */
 .hojo{margin:16px 0 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff}
 .hojo-in{background:#14305e;background-image:repeating-conic-gradient(from 0deg at 50% 120%,rgba(255,255,255,.06) 0deg 6deg,transparent 6deg 12deg);color:#fff;padding:18px 16px;text-align:center;display:grid;gap:4px}
@@ -337,7 +349,7 @@ figure.rel svg{display:block;width:100%;height:auto}
 
 <ul class="points"><li><b>連絡は、事務局から1本だけ</b><span>受付後、1〜2営業日を目安に事務局からご連絡します。業者が直接かけてくることはありません。</span></li><li><b>業者へ渡すのは、最大3社</b><span>どの会社に情報を渡すかは、事前にお伝えします。それ以外の会社から連絡が行くことはありません。</span></li><li><b>お断りは、代わりに伝えます</b><span>見積を見て合わなければ、事務局にひと言ください。断りの連絡も、値下げの相談も、事務局が間に入ります。</span></li><li><b>費用は、0円です</b><span>紹介は無料。お客様が払うのは、実際に依頼した解体工事の費用だけです。</span></li></ul>
 </div>
-<figure class="rel"><svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="お客様と案内所と登録業者の関係図"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0b5fff"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a94a0"/></marker></defs><g><rect x="10" y="80" width="130" height="64" rx="12" fill="#0b5fff"/><text x="75" y="119" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">あなた</text></g><g><rect x="260" y="56" width="180" height="112" rx="12" fill="#fff" stroke="#0b5fff" stroke-width="2"/><text x="350" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2933">解体案内所（事務局）</text><text x="350" y="124" text-anchor="middle" font-size="12" fill="#52606d">条件に合う会社を最大3社に絞る</text><text x="350" y="146" text-anchor="middle" font-size="12" fill="#52606d">断りも値下げの相談も間に入る</text></g><g transform="translate(580,20)"><rect x="0" y="0" width="170" height="44" rx="8" fill="#fff" stroke="#cbd2d9"/><text x="85" y="28" text-anchor="middle" font-size="14" fill="#1f2933">登録業者 A</text></g><g transform="translate(580,80)"><rect x="0" y="0" width="170" height="44" rx="8" fill="#fff" stroke="#cbd2d9"/><text x="85" y="28" text-anchor="middle" font-size="14" fill="#1f2933">登録業者 B</text></g><g transform="translate(580,140)"><rect x="0" y="0" width="170" height="44" rx="8" fill="#fff" stroke="#cbd2d9"/><text x="85" y="28" text-anchor="middle" font-size="14" fill="#1f2933">登録業者 C</text></g><path d="M144 96 H254" stroke="#0b5fff" stroke-width="2.5" marker-end="url(#ah)"/><text x="199" y="86" text-anchor="middle" font-size="12" fill="#1f2933">条件を送る（1分）</text><path d="M254 130 H144" stroke="#8a94a0" stroke-width="2.5" marker-end="url(#ag)"/><text x="199" y="152" text-anchor="middle" font-size="12" fill="#52606d">比べて決める</text><path d="M444 96 H574" stroke="#0b5fff" stroke-width="2.5" marker-end="url(#ah)"/><text x="509" y="86" text-anchor="middle" font-size="12" fill="#1f2933">最大3社を手配</text><path d="M574 130 H444" stroke="#8a94a0" stroke-width="2.5" marker-end="url(#ag)"/><text x="509" y="152" text-anchor="middle" font-size="12" fill="#52606d">明細つきの見積</text><text x="380" y="232" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">業者からあなたへ、営業の電話は行きません。断るときは、事務局が代わりに伝えます。</text></svg></figure>
+<div class="rel"><div class="rel-you">あなた</div><div class="rel-arr"><div class="fwd"><i class="h">&#8594;</i><i class="v">&#8595;</i>条件を送る（1分）</div><div class="back"><i class="h">&#8592;</i><i class="v">&#8593;</i>比べて決める</div></div><div class="rel-office"><b>解体案内所（事務局）</b><span>条件に合う会社を最大3社に絞る</span><span>断りも値下げの相談も間に入る</span></div><div class="rel-arr"><div class="fwd"><i class="h">&#8594;</i><i class="v">&#8595;</i>最大3社を手配</div><div class="back"><i class="h">&#8592;</i><i class="v">&#8593;</i>明細つきの見積</div></div><div class="rel-vendors"><span>登録業者 A</span><span>登録業者 B</span><span>登録業者 C</span></div><p class="rel-foot">業者からあなたへ、営業の電話は行きません。断るときは、事務局が代わりに伝えます。</p></div>
 <div class="rescue"><p class="rescue-t">家の条件を選んで、無料で見積を手配してみませんか。</p><a class="cta" href="#form">無料で解体の見積を手配する</a><p class="note">完全無料・入力1分・断っても費用はかかりません・業者からの営業電話なし</p></div>
 </section>
 
