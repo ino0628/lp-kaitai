@@ -191,11 +191,13 @@ body.has-sticky{padding-bottom:72px}
 
 /* ---- 視覚モード（visual:true） ---- */
 .v .wrap{max-width:880px}
-.v .hero{display:grid;gap:18px;padding:24px 0 16px}
-.v .hero-media{margin:0;border-radius:16px;overflow:hidden;background:var(--soft);aspect-ratio:16/10}
+.v .hero{display:grid;gap:14px 18px;padding:24px 0 16px;grid-template-areas:"h" "t" "m"}
+.v .hero>h1{grid-area:h;margin:0}
+.v .hero-text{grid-area:t}
+.v .hero-media{grid-area:m;margin:0;border-radius:16px;overflow:hidden;background:var(--soft);aspect-ratio:16/10}
 .v .hero-media img{display:block;width:100%;height:100%;object-fit:cover}
 .v .hero h1{font-size:27px}
-@media (min-width:800px){.v .hero{grid-template-columns:1.15fr 1fr;align-items:center;padding:36px 0 26px}.v .hero-media{aspect-ratio:auto;height:100%;min-height:320px}.v .hero h1{font-size:34px}}
+@media (min-width:800px){.v .hero{grid-template-columns:1.15fr 1fr;grid-template-areas:"h h" "t m";align-items:stretch;padding:36px 0 26px}.v .hero-media{aspect-ratio:auto;height:100%;min-height:320px}.v .hero h1{font-size:30px;line-height:1.35;letter-spacing:-.01em}}
 .v .checks.two{grid-template-columns:1fr}
 @media (min-width:640px){.v .checks.two{grid-template-columns:1fr 1fr}}
 .v .checks li.ico{padding-left:52px}
@@ -256,7 +258,7 @@ figure.ph figcaption{font-size:13px;color:var(--sub);padding:8px 12px;background
 .fvf select{margin-top:2px;padding:11px 10px;font-size:16px}
 .fvf-btn{width:100%;display:block;margin:12px 0 0;font-size:17px;padding:15px 16px;border:0;cursor:pointer}
 .fvf-note{margin:8px 0 0;text-align:center}
-@media (min-width:800px){.v .hero.has-fvf{grid-template-columns:1fr 1fr}}
+@media (min-width:800px){.v .hero.has-fvf{grid-template-columns:1fr 1fr}.v .hero-text>.note:last-child{margin-bottom:0}}
 /* 関係図 */
 figure.rel{margin:14px 0 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
 figure.rel svg{display:block;width:100%;height:auto}
@@ -309,11 +311,11 @@ figure.rel svg{display:block;width:100%;height:auto}
 
 <div class="wrap">
 <div class="hero has-fvf">
-<div class="hero-text">
 <h1>空き家の解体、補助金で最大150万円。</h1>
+<div class="hero-text">
 <p>自治体の解体補助金は、札幌市の例で最大150万円。補助金を視野に入れた登録業者から、明細つきの見積を最大3社手配します。完全無料。業者からの営業電話はありません。</p>
 <ul class="badges"><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>完全無料</li><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>入力1分</li><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 7 5-7"/><path d="M12 11v9"/><path d="M8 13h8"/><path d="M8 17h8"/></svg></span>補助金に強い登録業者</li><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span>業者からの営業電話なし</li></ul>
-<form class="fvf" id="fvform" novalidate><p class="fvf-t">まず、家の条件だけ教えてください（お名前などは次の画面で）</p><div class="fvf-grid"><label><span class="fvf-step">STEP1</span>建物の構造<select name="structure"><option value="">選んでください</option><option>木造</option><option>鉄骨造</option><option>鉄筋コンクリート造</option><option>分からない</option></select></label><label><span class="fvf-step">STEP2</span>延べ床面積の目安<select name="size"><option value="">選んでください</option><option>20坪未満</option><option>20〜30坪</option><option>30〜40坪</option><option>40坪以上</option><option>分からない</option></select></label><label><span class="fvf-step">STEP3</span>解体する家のある都道府県<select name="pref"><option value="">選んでください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></label></div><button type="submit" class="cta fvf-btn" data-cta="fv_form">無料で見積を手配する（あと1分）</button><p class="note fvf-note">業者からの営業電話はありません。断るときは、事務局が代わりに伝えます。</p></form>
+<form class="fvf" id="fvform" novalidate><p class="fvf-t">まず、家の条件だけ教えてください</p><div class="fvf-grid"><label><span class="fvf-step">STEP1</span>建物の構造<select name="structure"><option value="">選んでください</option><option>木造</option><option>鉄骨造</option><option>鉄筋コンクリート造</option><option>分からない</option></select></label><label><span class="fvf-step">STEP2</span>延べ床面積の目安<select name="size"><option value="">選んでください</option><option>20坪未満</option><option>20〜30坪</option><option>30〜40坪</option><option>40坪以上</option><option>分からない</option></select></label><label><span class="fvf-step">STEP3</span>解体する家のある都道府県<select name="pref"><option value="">選んでください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></label></div><button type="submit" class="cta fvf-btn" data-cta="fv_form">無料で見積を手配する（あと1分）</button><p class="note fvf-note">業者からの営業電話はありません。断るときは、事務局が代わりに伝えます。</p></form>
 <p class="note">※補助金の上限は札幌市（地域連携型・2026年度）の例。制度と上限は自治体ごとに違い、交付決定より前に契約した工事は対象外です。完全無料。しつこい営業はしないよう、対応事業者と取り決めています。</p>
 </div>
 <figure class="hero-media"><img src="img/hero_house.jpg" alt="長く空き家になっている木造の家（イメージ）" width="1344" height="768" srcset="img/hero_house-720.jpg 720w, img/hero_house.jpg 1400w" sizes="(max-width: 800px) 100vw, 880px" fetchpriority="high"></figure>
