@@ -515,7 +515,9 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
     var sec = document.getElementById('form');
     if (sec) { sec.scrollIntoView({block:'start'}); } else { location.hash = '#form'; }
     try { history.replaceState(null, '', location.pathname + location.search + '#form'); } catch(x) {}
-    setTimeout(function(){ var n = lead.querySelector('[name="city"]') || lead.querySelector('[name="name"]'); if (n) n.focus({preventScroll:true}); }, 400); }); }
+    setTimeout(function(){ var pf = lead.querySelector('select[name="pref"]');
+      var n = (pf && !pf.value) ? pf : (lead.querySelector('[name="city"]') || lead.querySelector('[name="name"]'));
+      if (n) n.focus({preventScroll:true}); }, 400); }); }
   if (document.body.classList.contains('ui-reveal') && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, {threshold: 0.15});
     document.querySelectorAll('.card, ol.steps li, .checks li').forEach(function(el){ io.observe(el); });
