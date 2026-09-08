@@ -166,8 +166,10 @@ label{display:block;font-weight:700;margin:12px 0 4px}
 label span{font-weight:400;color:var(--sub);font-size:12px;margin-left:6px}
 input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;padding:12px;border:1px solid #cbd2d9;border-radius:8px;font-size:16px;background:#fff}
 textarea{min-height:90px}
-.consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:14px}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:14px;border:2px solid transparent;border-radius:8px;padding:6px 8px;transition:border-color .15s ease,background-color .15s ease}
 .consent input{margin-top:5px}
+.consent.need{border-color:#d92d20;background:#fff4f3}
+.consent.need input{outline:2px solid #d92d20;outline-offset:2px}
 button{width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:16px;font-size:17px;font-weight:700;cursor:pointer}
 button[disabled]{opacity:.6;cursor:wait}
 .err{color:#b42318;font-size:14px;margin-top:8px;display:none}
@@ -508,7 +510,10 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
     fvf.querySelectorAll('select').forEach(function(s){ if (!s.value) return; var t = lead.querySelector('[name="' + s.name + '"]'); if (t) t.value = s.value;
       if (s.name === 'pref') { var p = lead.querySelector('input[type="text"][name="place"]'); if (p && p.value.indexOf(s.value) !== 0) p.value = s.value + (p.value || ''); } });
     if (typeof gtag === 'function') gtag('event', 'cta_click', { location: 'fv_form', page_kind: 'lp' });
-    location.hash = '#form'; setTimeout(function(){ var n = lead.querySelector('[name="city"]') || lead.querySelector('[name="name"]'); if (n) n.focus({preventScroll:true}); }, 400); }); }
+    var sec = document.getElementById('form');
+    if (sec) { sec.scrollIntoView({block:'start'}); } else { location.hash = '#form'; }
+    try { history.replaceState(null, '', location.pathname + location.search + '#form'); } catch(x) {}
+    setTimeout(function(){ var n = lead.querySelector('[name="city"]') || lead.querySelector('[name="name"]'); if (n) n.focus({preventScroll:true}); }, 400); }); }
   if (document.body.classList.contains('ui-reveal') && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, {threshold: 0.15});
     document.querySelectorAll('.card, ol.steps li, .checks li').forEach(function(el){ io.observe(el); });
@@ -517,13 +522,18 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
 (function(){
   var d = document.getElementById('dlform'); if (!d) return;
   var q = new URLSearchParams(location.search);
+  var dc0 = document.getElementById('dlconsent');
+  if (dc0) dc0.addEventListener('change', function(){ var b = d.querySelector('.consent'); if (b && dc0.checked) b.classList.remove('need'); });
   d.addEventListener('submit', function(ev){
     ev.preventDefault();
     var er = document.getElementById('dlerr'), b = d.querySelector('.dl-btn');
     er.style.display = 'none';
     var nm = d.querySelector('[name="name"]').value.trim(), em = d.querySelector('[name="email"]').value.trim();
     if (!nm || !em) { er.textContent = 'お名前とメールアドレスをご入力ください。'; er.style.display = 'block'; return; }
-    if (!document.getElementById('dlconsent').checked) { er.textContent = '同意のチェックをお願いします。'; er.style.display = 'block'; return; }
+    var dc = document.getElementById('dlconsent'), dbox = d.querySelector('.consent');
+    if (!dc.checked) { if (dbox) dbox.classList.add('need'); dc.focus({preventScroll:true}); if (dbox) dbox.scrollIntoView({block:'center'});
+      er.textContent = '同意のチェックをお願いします。'; er.style.display = 'block'; return; }
+    if (dbox) dbox.classList.remove('need');
     if (!window.LP_ENDPOINT) { er.textContent = '受付の準備中です。時間をおいて再度お試しください。'; er.style.display = 'block'; return; }
     var gclid = q.get('gclid') || ''; try { if (!gclid) gclid = sessionStorage.getItem('gclid') || ''; } catch(e) {}
     var data = { kind: 'download', box: 'kaitai', name: nm, email: em, consent: 'yes', consent_at: new Date().toISOString(),
@@ -542,6 +552,7 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
   f.page.value = location.href.split('?')[0] + (src ? '?src=' + src : '');
   f.gclid.value = q.get('gclid') || '';
   try { if (q.get('gclid')) sessionStorage.setItem('gclid', q.get('gclid')); else f.gclid.value = sessionStorage.getItem('gclid') || ''; } catch(e) {}
+  f.consent.addEventListener('change', function(){ var b = f.querySelector('.consent'); if (b && f.consent.checked) b.classList.remove('need'); });
   f.addEventListener('submit', function(ev){
     ev.preventDefault(); err.style.display = 'none';
     if (f.company.value) return; // honeypot
@@ -549,7 +560,10 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
     var pref = f.querySelector('select[name="pref"]'), city = f.querySelector('[name="city"]');
     if (pref && city && place) { if (!pref.value || !city.value.trim()) { err.textContent = '都道府県と市区町村をご入力ください。'; err.style.display = 'block'; return; } place.value = pref.value + city.value.trim(); }
     if (!f.name.value.trim() || !f.tel.value.trim() || (place && !place.value.trim())) { err.textContent = '必須の項目をご入力ください。'; err.style.display = 'block'; return; }
-    if (!f.consent.checked) { err.textContent = '同意のチェックをお願いします。'; err.style.display = 'block'; return; }
+    var cbox = f.querySelector('.consent');
+    if (!f.consent.checked) { if (cbox) cbox.classList.add('need'); f.consent.focus({preventScroll:true}); if (cbox) cbox.scrollIntoView({block:'center'});
+      err.textContent = '同意のチェックをお願いします。'; err.style.display = 'block'; return; }
+    if (cbox) cbox.classList.remove('need');
     f.consent_at.value = new Date().toISOString();
     var data = {}; new FormData(f).forEach(function(v, k){ data[k] = v; });
     if (!window.LP_ENDPOINT) { err.textContent = '受付の準備中です。時間をおいて再度お試しください。'; err.style.display = 'block'; return; }
