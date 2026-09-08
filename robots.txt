@@ -3,5 +3,6 @@ Allow: /
 Disallow: /thanks.html
 Disallow: /b.html
 Disallow: /tebiki.html
+Disallow: /tebiki.pdf
 
 Sitemap: https://kaitai.kurashi-annai.com/sitemap.xml
