@@ -418,7 +418,7 @@ figure.ph figcaption{font-size:13px;color:var(--sub);padding:8px 12px;background
 <p class="note">金額は一般的な目安です。地域と現地の見積で確定します。</p>
 </section>
 
-<section class="dl" id="material" data-sec="material"><div class="dl-in"><p class="dl-eyebrow">まだ見積の段階ではない方へ</p><h2 class="dl-t">解体の段取り表（家財・届出・工期・登記）</h2><p class="dl-lead">「まず何から？」を1枚に。家財をどうするか、誰が何を届け出るか、いつ登記するか。見積を頼む前に、順番だけ持ち帰ってください。</p><ul class="dl-points"><li>家財（残置物）を解体と一緒に出すか、自分で出すかの決め方</li><li>補助金は申請→交付決定→契約の順。先に契約すると対象外</li><li>着工7日前までの届出は、業者ではなく施主の義務</li><li>壊したあと1か月以内の建物滅失登記（怠ると過料）</li></ul><form id="dlform" novalidate><label>お名前 <span>必須</span></label><input type="text" name="name" autocomplete="name"><label>メールアドレス <span>必須・ここにお送りします</span></label><input type="email" name="email" autocomplete="email" inputmode="email"><div class="consent"><input type="checkbox" id="dlconsent"><label for="dlconsent" style="margin:0;font-weight:400"><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意し、資料の送付とご連絡のために利用することに同意します</label></div><button type="submit" class="cta dl-btn">段取り表を受け取る（無料）</button><p class="note dl-note">お名前とメールアドレスだけ。見積の手配とは別で、業者へは渡しません。</p><div class="err" id="dlerr"></div></form></div></section>
+<section class="dl" id="material" data-sec="material"><div class="dl-in"><p class="dl-eyebrow">まだ見積の段階ではない方へ</p><h2 class="dl-t">解体の段取り表</h2><p class="dl-lead">「まず何から？」を1枚に。家財をどうするか、誰が何を届け出るか、いつ登記するか。見積を頼む前に、順番だけ持ち帰ってください。</p><ul class="dl-points"><li>完了させたい日の約2か月前から動く（逆算の起点）</li><li>家財（残置物）を解体と一緒に出すか、自分で出すかの決め方</li><li>補助金は申請→交付決定→契約の順。先に契約すると対象外</li><li>着工7日前までの届出は、業者ではなく施主の義務</li></ul><form id="dlform" novalidate><label>お名前 <span>必須</span></label><input type="text" name="name" autocomplete="name"><label>メールアドレス <span>必須・ここにお送りします</span></label><input type="email" name="email" autocomplete="email" inputmode="email"><div class="consent"><input type="checkbox" id="dlconsent"><label for="dlconsent" style="margin:0;font-weight:400"><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意し、資料の送付とご連絡のために利用することに同意します</label></div><button type="submit" class="cta dl-btn">段取り表を受け取る（無料）</button><p class="note dl-note">お名前とメールアドレスだけ。見積の手配とは別で、業者へは渡しません。</p><div class="err" id="dlerr"></div></form></div></section>
 
 <section id="voices" data-sec="voices">
 <h2>こんな不安も、先に解いておきます</h2>
@@ -553,7 +553,7 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
     if (!window.LP_ENDPOINT) { er.textContent = '受付の準備中です。時間をおいて再度お試しください。'; er.style.display = 'block'; return; }
     var gclid = q.get('gclid') || ''; try { if (!gclid) gclid = sessionStorage.getItem('gclid') || ''; } catch(e) {}
     var data = { kind: 'download', box: 'kaitai', name: nm, email: em, consent: 'yes', consent_at: new Date().toISOString(),
-                 material: '解体の段取り表（家財・届出・工期・登記）', material_url: 'https://kaitai.kurashi-annai.com/tebiki.html', page: location.href.split('?')[0], gclid: gclid };
+                 material: '解体の段取り表', material_url: 'https://kaitai.kurashi-annai.com/tebiki.html', page: location.href.split('?')[0], gclid: gclid };
     b.disabled = true; b.textContent = '送信しています…';
     if (typeof gtag === 'function') gtag('event', 'material_download', { page_kind: 'lp' });
     fetch(window.LP_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data) })
