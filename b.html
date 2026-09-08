@@ -165,6 +165,9 @@ form{background:var(--card);border:1px solid var(--line);border-radius:10px;padd
 label{display:block;font-weight:700;margin:12px 0 4px}
 label span{font-weight:400;color:var(--sub);font-size:12px;margin-left:6px}
 input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;padding:12px;border:1px solid #cbd2d9;border-radius:8px;font-size:16px;background:#fff}
+input.need,select.need,textarea.need{border-color:#d92d20;background:#fff4f3}
+.fs input.need,.fs select.need,.fs textarea.need{background:#fff4f3}
+.dl input.need{background:#fff4f3}
 textarea{min-height:90px}
 .consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:14px;border:2px solid transparent;border-radius:8px;padding:6px 8px;transition:border-color .15s ease,background-color .15s ease}
 .consent input{margin-top:5px}
@@ -523,13 +526,19 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
   var d = document.getElementById('dlform'); if (!d) return;
   var q = new URLSearchParams(location.search);
   var dc0 = document.getElementById('dlconsent');
+  d.querySelectorAll('input').forEach(function(x){ x.addEventListener('input', function(){ if (x.value.trim()) x.classList.remove('need'); }); });
   if (dc0) dc0.addEventListener('change', function(){ var b = d.querySelector('.consent'); if (b && dc0.checked) b.classList.remove('need'); });
   d.addEventListener('submit', function(ev){
     ev.preventDefault();
     var er = document.getElementById('dlerr'), b = d.querySelector('.dl-btn');
     er.style.display = 'none';
-    var nm = d.querySelector('[name="name"]').value.trim(), em = d.querySelector('[name="email"]').value.trim();
-    if (!nm || !em) { er.textContent = 'お名前とメールアドレスをご入力ください。'; er.style.display = 'block'; return; }
+    var dn = d.querySelector('[name="name"]'), de = d.querySelector('[name="email"]');
+    var nm = dn.value.trim(), em = de.value.trim();
+    var dmiss = []; if (!nm) dmiss.push(dn); if (!em) dmiss.push(de);
+    d.querySelectorAll('input.need').forEach(function(x){ x.classList.remove('need'); });
+    dmiss.forEach(function(x){ x.classList.add('need'); });
+    if (dmiss.length) { er.textContent = dmiss.length > 1 ? '赤い欄をご入力ください。' : (dmiss[0] === dn ? 'お名前をご入力ください。' : 'メールアドレスをご入力ください。');
+      er.style.display = 'block'; dmiss[0].scrollIntoView({block: 'center'}); dmiss[0].focus({preventScroll: true}); return; }
     var dc = document.getElementById('dlconsent'), dbox = d.querySelector('.consent');
     if (!dc.checked) { if (dbox) dbox.classList.add('need'); dc.focus({preventScroll:true}); if (dbox) dbox.scrollIntoView({block:'center'});
       er.textContent = '同意のチェックをお願いします。'; er.style.display = 'block'; return; }
@@ -552,14 +561,30 @@ window.LP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyX9lsvDTMzTPzCo2D
   f.page.value = location.href.split('?')[0] + (src ? '?src=' + src : '');
   f.gclid.value = q.get('gclid') || '';
   try { if (q.get('gclid')) sessionStorage.setItem('gclid', q.get('gclid')); else f.gclid.value = sessionStorage.getItem('gclid') || ''; } catch(e) {}
+  function labelOf(el) { var l = el.closest('.fs') ? el.previousElementSibling : null; var i = 0;
+    while (l && l.tagName !== 'LABEL' && i++ < 3) { l = l.previousElementSibling; }
+    return l ? l.childNodes[0].textContent.trim() : 'この項目'; }
+  function mark(list) { f.querySelectorAll('.need').forEach(function(x){ if (x.tagName !== 'DIV') x.classList.remove('need'); });
+    list.forEach(function(x){ x.classList.add('need'); }); }
+  f.querySelectorAll('input,select,textarea').forEach(function(x){
+    x.addEventListener('input', function(){ if (x.value && String(x.value).trim()) x.classList.remove('need'); });
+    x.addEventListener('change', function(){ if (x.value && String(x.value).trim()) x.classList.remove('need'); });
+  });
   f.consent.addEventListener('change', function(){ var b = f.querySelector('.consent'); if (b && f.consent.checked) b.classList.remove('need'); });
   f.addEventListener('submit', function(ev){
     ev.preventDefault(); err.style.display = 'none';
     if (f.company.value) return; // honeypot
     var place = f.querySelector('[name="place"]');
     var pref = f.querySelector('select[name="pref"]'), city = f.querySelector('[name="city"]');
-    if (pref && city && place) { if (!pref.value || !city.value.trim()) { err.textContent = '都道府県と市区町村をご入力ください。'; err.style.display = 'block'; return; } place.value = pref.value + city.value.trim(); }
-    if (!f.name.value.trim() || !f.tel.value.trim() || (place && !place.value.trim())) { err.textContent = '必須の項目をご入力ください。'; err.style.display = 'block'; return; }
+    var miss = [];
+    if (pref && city) { if (!pref.value) miss.push(pref); if (!city.value.trim()) miss.push(city); }
+    else if (place && !place.value.trim()) { miss.push(place); }
+    if (!f.name.value.trim()) miss.push(f.name);
+    if (!f.tel.value.trim()) miss.push(f.tel);
+    mark(miss);
+    if (miss.length) { err.textContent = miss.length > 1 ? '赤い欄をご入力ください。' : (labelOf(miss[0]) + 'をご入力ください。'); err.style.display = 'block';
+      miss[0].scrollIntoView({block: 'center'}); miss[0].focus({preventScroll: true}); return; }
+    if (pref && city && place) { place.value = pref.value + city.value.trim(); }
     var cbox = f.querySelector('.consent');
     if (!f.consent.checked) { if (cbox) cbox.classList.add('need'); f.consent.focus({preventScroll:true}); if (cbox) cbox.scrollIntoView({block:'center'});
       err.textContent = '同意のチェックをお願いします。'; err.style.display = 'block'; return; }
