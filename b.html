@@ -204,13 +204,15 @@ body.has-sticky{padding-bottom:72px}
 
 /* ---- 視覚モード（visual:true） ---- */
 .v .wrap{max-width:880px}
-.v .hero{display:grid;gap:14px 18px;padding:24px 0 16px;grid-template-areas:"h" "t" "m"}
+.v .hero{display:grid;gap:14px 18px;padding:24px 0 16px;grid-template-areas:"h" "i" "t" "m"}
+.v .hero-intro{grid-area:i}
+.v .hero-intro>:last-child{margin-bottom:0}
 .v .hero>h1{grid-area:h;margin:0}
 .v .hero-text{grid-area:t}
 .v .hero-media{grid-area:m;margin:0;border-radius:16px;overflow:hidden;background:var(--soft);aspect-ratio:16/10}
 .v .hero-media img{display:block;width:100%;height:100%;object-fit:cover}
 .v .hero h1{font-size:27px}
-@media (min-width:800px){.v .hero{grid-template-columns:1.15fr 1fr;grid-template-areas:"h h" "t m";align-items:stretch;padding:36px 0 26px}.v .hero-media{aspect-ratio:auto;height:100%;min-height:320px}.v .hero h1{font-size:30px;line-height:1.35;letter-spacing:-.01em}}
+@media (min-width:800px){.v .hero{grid-template-columns:1.15fr 1fr;grid-template-areas:"h h" "i m" "t m";align-items:stretch;padding:36px 0 26px}.v .hero-media{aspect-ratio:auto;height:100%;min-height:320px}.v .hero h1{font-size:30px;line-height:1.35;letter-spacing:-.01em}}
 .v .checks.two{grid-template-columns:1fr}
 @media (min-width:640px){.v .checks.two{grid-template-columns:1fr 1fr}}
 .v .checks li.ico{padding-left:52px}
@@ -300,7 +302,9 @@ figure.ph figcaption{font-size:13px;color:var(--sub);padding:8px 12px;background
 .v .checks li.has-a details p{margin:0;padding:0 16px 12px 52px;color:var(--sub);font-size:14px;line-height:1.65}
 .v .checks.two{align-items:start}
 @media (min-width:640px){.v .checks.two li.has-a:has(details[open]){grid-column:1 / -1}}
-@media (min-width:800px){.v .hero.has-fvf{grid-template-columns:1fr 1fr}.v .hero-text>.note:last-child{margin-bottom:0}}
+@media (min-width:800px){.v .hero.has-fvf{grid-template-columns:1fr 1fr}.v .hero-text>.note:last-child{margin-bottom:0}
+.v .hero.media-from-form{grid-template-areas:"h h" "i i" "t m"}
+.v .hero.media-from-form .hero-intro{max-width:760px}}
 /* 関係図（HTML）: スマホは縦に積む・PC は横3列 */
 .rel{margin:14px 0 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 14px;display:grid;gap:10px;justify-items:center;text-align:center}
 .rel-you{background:var(--accent);color:#fff;font-weight:800;font-size:17px;border-radius:12px;padding:14px 26px;min-width:8em}
@@ -364,15 +368,17 @@ figure.ph figcaption{font-size:13px;color:var(--sub);padding:8px 12px;background
 <header><div class="wrap"><div class="brand"><span class="name">解体案内所</span><a class="cta small" href="#form">無料で見積</a></div></div></header>
 
 <div class="wrap">
-<div class="hero has-fvf">
+<div class="hero has-fvf media-from-form">
 <h1>空き家の解体、木造30坪で90万〜200万円。補助金で最大150万円戻ることも。</h1>
-<div class="hero-text">
+<div class="hero-intro">
 <p>差がつくのは、道路・隣家・地中の3つと、補助金を使えるかどうか。補助金を視野に入れた登録業者の明細つき見積を最大3社で並べれば、高い見積に気づけます。完全無料・業者からの営業電話なし。</p>
 <ul class="badges"><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>完全無料</li><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>入力1分</li><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 7 5-7"/><path d="M12 11v9"/><path d="M8 13h8"/><path d="M8 17h8"/></svg></span>補助金に強い登録業者</li><li class="ico"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg></span>業者からの営業電話なし</li></ul>
+</div>
+<div class="hero-text">
 <form class="fvf" id="fvform" novalidate><p class="fvf-t">家の条件を選ぶと、概算がその場で出ます</p><div class="fvf-grid"><label><span class="fvf-step">STEP1</span>建物の構造<select name="structure"><option value="">選んでください</option><option>木造</option><option>鉄骨造</option><option>鉄筋コンクリート造</option><option>分からない</option></select></label><label><span class="fvf-step">STEP2</span>延べ床面積の目安<select name="size"><option value="">選んでください</option><option>20坪未満</option><option>20〜30坪</option><option>30〜40坪</option><option>40坪以上</option><option>分からない</option></select></label><div class="fvf-est" id="fvest-box" hidden><p class="fvf-est-t"><b id="fvest-cond"></b>の解体費の目安</p><p class="fvf-est-n" id="fvest-amt"></p><p class="fvf-est-b">本体・処分・養生・付帯・諸経費を含む一般的な幅（公開されている坪単価×坪数）。道路の広さ・隣家との距離・地中の埋設物・アスベストで数倍変わるので、同じ条件で明細つきの見積を3社並べて確かめます。</p><p class="fvf-est-b">補助金は自治体ごと。札幌市は最大150万円、名古屋市は最大40万〜80万円、北九州市は最大30万円の例があります。交付決定の前に契約すると対象外なので、申請→交付決定→契約の順に組みます。</p></div><label><span class="fvf-step">STEP3</span>解体する家のある都道府県<select name="pref"><option value="">選んでください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></label></div><button type="submit" class="cta fvf-btn" data-cta="fv_form">概算を見る</button><p class="note fvf-note">業者からの営業電話はありません。断るときは、事務局が代わりに伝えます。</p><script type="application/json" id="fvest">{"f1": "structure", "f2": "size", "fallback": "木造", "labels": {"分からない": "30坪の場合"}, "matrix": {"木造": {"20坪未満": "45万〜140万円", "20〜30坪": "60万〜200万円", "30〜40坪": "90万〜280万円", "40坪以上": "120万円〜", "分からない": "90万〜200万円"}, "鉄骨造": {"20坪未満": "45万〜120万円", "20〜30坪": "60万〜180万円", "30〜40坪": "90万〜240万円", "40坪以上": "120万円〜", "分からない": "90万〜180万円"}, "鉄筋コンクリート造": {"20坪未満": "60万〜240万円", "20〜30坪": "80万〜360万円", "30〜40坪": "120万〜480万円", "40坪以上": "160万円〜", "分からない": "120万〜360万円"}}, "see": "概算を見る", "submit": "この条件で、無料で見積を手配する"}</script></form>
 <p class="note">※補助金の上限は札幌市（地域連携型・2026年度）の例。制度と上限は自治体ごとに違い、交付決定より前に契約した工事は対象外です。完全無料。しつこい営業はしないよう、対応事業者と取り決めています。</p>
 </div>
-<figure class="hero-media"><img src="img/hero_house.jpg" alt="長く空き家になっている木造の家（イメージ）" width="1344" height="768" srcset="img/hero_house-720.jpg 720w, img/hero_house.jpg 1400w" sizes="(max-width: 800px) 100vw, 880px" fetchpriority="high"></figure>
+<figure class="hero-media"><img src="img/hero_house.jpg" alt="長く空き家になっている木造の家（イメージ）" width="1080" height="1350" srcset="img/hero_house-720.jpg 720w, img/hero_house.jpg 1400w" sizes="(max-width: 800px) 100vw, 880px" fetchpriority="high"></figure>
 </div>
 
 <section id="pain" data-sec="pain">
